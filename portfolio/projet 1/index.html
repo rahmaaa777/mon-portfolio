@@ -2,70 +2,61 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formulaire de Paiement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculatrice</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="logo-container">
-        <img src="logo.png" alt="Logo du Workshop" class="logo" />
-      </div>
-  <div class="form-container">
-    <h2>Paiement pour le Workshop</h2>
+  <div class="calculator">
+    <input type="text" id="display" readonly />
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="appendValue('/')">/</button>
+      <button onclick="appendValue('*')">*</button>
+      <button onclick="deleteLast()">⌫</button>
 
-    <form>
-      <div class="section">
-        <label for="name">Nom complet</label>
-        <input type="text" id="name" name="name" required />
-      </div>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('-')">-</button>
 
-      <div class="section">
-        <label for="email">Adresse Email</label>
-        <input type="email" id="email" name="email" required />
-      </div>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('+')">+</button>
 
-      <div class="section">
-        <label>Méthode de paiement</label>
-        <div class="payment-methods">
-          <label>
-            <input type="radio" name="payment" value="visa" required />
-            <img src="icons/visa.png" alt="Visa" />
-          </label>
-          <label>
-            <input type="radio" name="payment" value="mastercard" />
-            <img src="icons/mastercard.png" alt="Mastercard" />
-          </label>
-          <label>
-            <input type="radio" name="payment" value="paypal" />
-            <img src="icons/paypal.png" alt="PayPal" />
-          </label>
-        </div>
-      </div>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="calculate()">=</button>
 
-      <div class="section">
-        <label for="card-name">Nom sur la carte</label>
-        <input type="text" id="card-name" name="card-name" required />
-      </div>
-
-      <div class="section">
-        <label for="card-number">Numéro de carte</label>
-        <input type="text" id="card-number" name="card-number" maxlength="19" required />
-      </div>
-
-      <div class="flex">
-        <div class="section">
-          <label for="expiry">Expiration</label>
-          <input type="text" id="expiry" name="expiry" placeholder="MM/AA" required />
-        </div>
-
-        <div class="section">
-          <label for="cvv">CVV</label>
-          <input type="text" id="cvv" name="cvv" maxlength="4" required />
-        </div>
-      </div>
-
-      <button type="submit">Payer</button>
-    </form>
+      <button onclick="appendValue('0')" class="zero">0</button>
+      <button onclick="appendValue('.')">.</button>
+    </div>
   </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = 'Erreur';
+      }
+    }
+  </script>
 </body>
 </html>
